@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<!-- =========================================================
+PROYECTO: AROMAS.DUO
+TIPO: Prototipo web interactivo
+DESCRIPCIÓN:
+Este archivo contiene el prototipo funcional del sistema
+Aromas.Duo, una plataforma gastronómica inspirada en la
+cocina tradicional del Caribe colombiano.
+
+El sistema permite:
+- Visualizar productos
+- Leer reseñas
+- Explorar un blog gastronómico
+- Simular compras mediante carrito
+- Acceder a diferentes roles del sistema
+========================================================= -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Título que aparece en la pestaña del navegador -->
+<title>Aromas.Duo</title>
+
+<style>
+
+/* =========================================================
+CONFIGURACIÓN GLOBAL DEL SITIO
+Elimina márgenes y define comportamiento base
+========================================================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+/* =========================================================
+ESTILO GENERAL DEL BODY
+Define colores principales y estructura vertical
+========================================================= */
+
+body{
+background:#191434;
+color:white;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* Permite que el contenido principal ocupe el espacio */
+
+main{
+flex:1;
+}
+
+/* =========================================================
+MÓDULO: MENÚ DE NAVEGACIÓN
+========================================================= */
+
+header{
+background:#111;
+padding:15px 50px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+/* Enlaces del menú */
+
+nav a{
+margin:10px;
+cursor:pointer;
+color:white;
+}
+
+/* Efecto visual al pasar el mouse */
+
+nav a:hover{
+color:#f39c12;
+}
+
+/* =========================================================
+CONFIGURACIÓN GENERAL DE SECCIONES
+Todas las secciones se ocultan inicialmente
+y se muestran mediante JavaScript
+========================================================= */
+
+section{
+display:none;
+min-height:calc(100vh - 120px);
+padding:80px 10%;
+}
+
+/* =========================================================
+MÓDULO: HERO (PÁGINA PRINCIPAL)
+========================================================= */
+
+.hero{
+
+background:
+linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url("https://images.unsplash.com/photo-1555992336-03a23c7b20ee");
+
+background-size:cover;
+background-position:center;
+
+min-height:calc(100vh - 120px);
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+padding:40px;
+
+}
+
+/* Título principal */
+
+.hero h1{
+font-size:48px;
+margin-bottom:20px;
+text-align:center;
+}
+
+/* Texto introductorio */
+
+.hero p{
+max-width:800px;
+margin:auto;
+margin-top:10px;
+line-height:1.7;
+font-size:18px;
+text-align:center;
+}
+
+/* =========================================================
+SISTEMA DE GRID RESPONSIVO
+Se utiliza para organizar productos, reseñas y paneles
+========================================================= */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
+
+/* =========================================================
+TARJETAS DE CONTENIDO
+Usadas en productos y paneles
+========================================================= */
+
+.card{
+background:white;
+color:black;
+border-radius:10px;
+overflow:hidden;
+}
+
+/* Imagen dentro de la tarjeta */
+
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+
+/* Contenido de la tarjeta */
+
+.card-content{
+padding:20px;
+text-align:center;
+}
+
+/* Descripción de productos (oculta por defecto) */
+
+.descripcion{
+display:none;
+margin-top:10px;
+font-size:14px;
+line-height:1.5;
+color:#333;
+}
+
+/* Botón para mostrar descripción */
+
+.leer-mas{
+margin-top:8px;
+background:#444;
+}
+
+/* =========================================================
+BOTONES GENERALES DEL SISTEMA
+========================================================= */
+
+button{
+background:#e67e22;
+border:none;
+padding:10px 15px;
+border-radius:6px;
+color:white;
+cursor:pointer;
+}
+
+/* =========================================================
+MÓDULO BLOG
+========================================================= */
+
+.blog-intro{
+max-width:900px;
+margin:auto;
+margin-bottom:50px;
+line-height:1.7;
+text-align:center;
+}
+
+.blog-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
+
+.blog-card{
+background:#2d2d2d;
+padding:30px;
+border-radius:10px;
+}
+
+.blog-card h3{
+margin-bottom:15px;
+}
+
+.blog-card p{
+line-height:1.6;
+}
+
+/* =========================================================
+MÓDULO RESEÑAS
+========================================================= */
+
+.review{
+text-align:center;
+}
+
+.review img{
+width:90px;
+height:90px;
+border-radius:50%;
+margin-bottom:10px;
+}
+
+/* =========================================================
+FORMULARIOS
+========================================================= */
+
+form{
+max-width:420px;
+margin:auto;
+}
+
+input,textarea{
+
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:6px;
+border:none;
+
+color:#000;
+font-weight:700;
+
+}
+
+/* Estilo placeholder */
+
+input::placeholder,
+textarea::placeholder{
+color:#000;
+opacity:1;
+}
+
+/* =========================================================
+LOGIN Y REGISTRO
+========================================================= */
+
+.box{
+background:white;
+color:black;
+padding:40px;
+border-radius:10px;
+max-width:420px;
+margin:auto;
+}
+
+/* =========================================================
+MÓDULO CARRITO
+========================================================= */
+
+.carrito-box{
+background:white;
+color:black;
+padding:30px;
+border-radius:10px;
+max-width:500px;
+margin:auto;
+}
+
+.item{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+}
+
+/* =========================================================
+FOOTER
+========================================================= */
+
+footer{
+background:#111;
+text-align:center;
+padding:20px;
+}
+
+h2{
+text-align:center;
+margin-bottom:40px;
+}
+
+</style>
+
+<script>
+
+/* =========================================================
+MÓDULO JAVASCRIPT: SISTEMA DE CARRITO
+Se utiliza un arreglo para almacenar productos
+========================================================= */
+
+let carrito=[]
+
+/* =========================================================
+FUNCIÓN: mostrar()
+Permite navegar entre secciones del sistema.
+Oculta todas las secciones y muestra solo la seleccionada.
+========================================================= */
+
+function mostrar(id){
+
+document.querySelectorAll("section").forEach(s=>s.style.display="none")
+
+document.getElementById(id).style.display="block"
+
+}
+
+/* =========================================================
+FUNCIÓN: agregar()
+Agrega un producto al carrito de compras.
+========================================================= */
+
+function agregar(nombre,precio){
+
+carrito.push({nombre,precio})
+
+alert(nombre+" agregado al carrito")
+
+}
+
+/* =========================================================
+FUNCIÓN: verCarrito()
+Muestra todos los productos agregados y calcula el total.
+========================================================= */
+
+function verCarrito(){
+
+let lista=document.getElementById("listaCarrito")
+
+lista.innerHTML=""
+
+let total=0
+
+carrito.forEach((p,i)=>{
+
+let li=document.createElement("div")
+
+li.className="item"
+
+li.innerHTML=`
+<span>${p.nombre} - $${p.precio}</span>
+<button onclick="eliminar(${i})">Eliminar</button>
+`
+
+lista.appendChild(li)
+
+total+=p.precio
+
+})
+
+document.getElementById("total").innerText="Total: $"+total
+
+mostrar("carrito")
+
+}
+
+/* =========================================================
+FUNCIÓN: eliminar()
+Elimina productos del carrito
+========================================================= */
+
+function eliminar(i){
+
+carrito.splice(i,1)
+
+verCarrito()
+
+}
+
+/* =========================================================
+FUNCIÓN: verPedido()
+Muestra resumen del pedido
+========================================================= */
+
+function verPedido(){
+
+alert("Tu pedido tiene "+carrito.length+" productos.")
+
+}
+
+/* =========================================================
+EVENTO DE CARGA
+Cuando se abre la página muestra la sección inicio
+========================================================= */
+
+window.onload=()=>mostrar("inicio")
+
+/* =========================================================
+FUNCIÓN: toggleDescripcion()
+Permite mostrar u ocultar la descripción de productos
+========================================================= */
+
+function toggleDescripcion(id){
+
+let d=document.getElementById(id)
+
+if(d.style.display==="block"){
+d.style.display="none"
+}else{
+d.style.display="block"
+}
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<!-- =========================================================
+HEADER
+Contiene el nombre del sistema y el menú principal
+========================================================= -->
+
+<header>
+
+<h2>Aromas.Duo</h2>
+
+<!-- =========================================================
+MENÚ PRINCIPAL DEL SISTEMA
+Cada enlace muestra una sección mediante JavaScript
+========================================================= -->
+
+<nav>
+
+<a onclick="mostrar('inicio')">Inicio</a>
+<a onclick="mostrar('productos')">Productos</a>
+<a onclick="mostrar('blog')">Blog</a>
+<a onclick="mostrar('resenas')">Reseñas</a>
+<a onclick="mostrar('contacto')">Contacto</a>
+<a onclick="mostrar('login')">Login</a>
+<a onclick="mostrar('registro')">Registro</a>
+<a onclick="verCarrito()">Carrito</a>
+<a onclick="mostrar('admin')">Administrador</a>
+<a onclick="mostrar('cocinero')">Cocinero</a>
+<a onclick="mostrar('ventas')">Auxiliar Ventas</a>
+
+</nav>
+
+</header>
+
+<main>
+
+<!-- INICIO -->
+
+<section id="inicio" class="hero">
+
+<h1>Bienvenido a Aromas.Duo</h1>
+
+<p>
+Aromas.Duo es un proyecto gastronómico inspirado en los sabores tradicionales del Caribe colombiano. 
+Nuestro objetivo es rescatar la riqueza cultural de la cocina costera y presentarla a través de una 
+experiencia digital moderna, donde los usuarios puedan descubrir platos auténticos, conocer su historia 
+y explorar la tradición culinaria de una forma accesible y atractiva.
+</p>
+
+<p>
+En nuestra plataforma podrás conocer diferentes productos representativos de la gastronomía caribeña, 
+leer reseñas de otros clientes, explorar nuestro blog gastronómico y realizar pedidos de manera sencilla. 
+Aromas.Duo busca unir la tradición, la cultura y la tecnología para ofrecer una experiencia culinaria 
+única que conecte a las personas con los sabores más representativos de nuestra región.
+</p>
+
+</section>
+
+<!-- PRODUCTOS -->
+
+<section id="productos">
+
+<h2>Catálogo de Productos</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1604908176997-4316f1f99b89">
+
+<div class="card-content">
+
+<h3>Empanadas Caribeñas</h3>
+
+<p>$12.000</p>
+
+<button onclick="agregar('Empanadas Caribeñas',12000)">Agregar</button>
+
+<button class="leer-mas" onclick="toggleDescripcion('empanada')">Leer más</button>
+
+<p id="empanada" class="descripcion">
+
+Empanadas tradicionales del Caribe colombiano elaboradas con masa crujiente y rellenas con carne
+condimentada y especias típicas de la región. Son uno de los aperitivos más representativos
+de la gastronomía costera.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+
+<div class="card-content">
+
+<h3>Arroz con Coco</h3>
+
+<p>$18.000</p>
+
+<button onclick="agregar('Arroz con Coco',18000)">Agregar</button>
+
+<button class="leer-mas" onclick="toggleDescripcion('arroz')">Leer más</button>
+
+<p id="arroz" class="descripcion">
+
+Delicioso arroz con coco preparado con una receta tradicional del Caribe colombiano.
+Su sabor dulce y su textura suave lo convierten en el acompañamiento perfecto
+para platos de pescado y mariscos.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1544025162-d76694265947">
+
+<div class="card-content">
+
+<h3>Filete de Pescado</h3>
+
+<p>$28.000</p>
+
+<button onclick="agregar('Filete de Pescado',28000)">Agregar</button>
+
+<button class="leer-mas" onclick="toggleDescripcion('pescado')">Leer más</button>
+
+<p id="pescado" class="descripcion">
+
+Filete de pescado fresco preparado con especias caribeñas y acompañado con
+ingredientes tradicionales que resaltan el sabor natural del mar.
+Un plato representativo de la cocina costera.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- BLOG -->
+
+<section id="blog">
+
+<h2>Blog gastronómico: historia, misión y visión de Aromas.Duo</h2>
+
+<div class="blog-intro">
+
+<p>
+
+En esta sección compartimos la historia del proyecto Aromas.Duo y la inspiración que dio origen a esta iniciativa.
+Nuestro objetivo es rescatar los sabores tradicionales del Caribe colombiano y combinarlos con herramientas digitales
+que permitan a las personas conocer, explorar y disfrutar la gastronomía de una forma innovadora.
+A través de este espacio también buscamos compartir nuestra filosofía de trabajo,
+nuestros valores y la proyección que tenemos hacia el futuro.
+
+</p>
+
+</div>
+
+<div class="blog-grid">
+
+<div class="blog-card">
+
+<h3>Misión</h3>
+
+<p>
+
+Nuestra misión es ofrecer una experiencia gastronómica auténtica inspirada en los sabores tradicionales
+del Caribe colombiano, brindando productos de calidad preparados con dedicación y creatividad.
+Buscamos integrar la tradición culinaria con herramientas tecnológicas que faciliten a los usuarios
+descubrir nuevos platos, conocer su origen cultural y disfrutar de una experiencia gastronómica única.
+
+</p>
+
+</div>
+
+<div class="blog-card">
+
+<h3>Visión</h3>
+
+<p>
+
+Nuestra visión es convertirnos en una marca reconocida por su capacidad de innovar en el sector gastronómico,
+manteniendo viva la tradición culinaria del Caribe colombiano y llevándola a nuevos espacios digitales.
+Aspiramos a consolidar una plataforma que conecte cultura, tecnología y gastronomía,
+permitiendo que cada vez más personas descubran y valoren la riqueza de nuestra cocina.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- RESEÑAS -->
+
+<section id="resenas">
+
+<h2>Opiniones de Clientes</h2>
+
+<div class="grid">
+
+<div class="review">
+
+<img src="https://randomuser.me/api/portraits/women/44.jpg">
+<h3>Laura Gómez</h3>
+<p>⭐⭐⭐⭐⭐</p>
+<p>La comida es deliciosa.</p>
+
+</div>
+
+<div class="review">
+
+<img src="https://randomuser.me/api/portraits/men/32.jpg">
+<h3>Carlos Rivas</h3>
+<p>⭐⭐⭐⭐⭐</p>
+<p>Una experiencia increíble.</p>
+
+</div>
+
+<div class="review">
+
+<img src="https://randomuser.me/api/portraits/women/65.jpg">
+<h3>María Torres</h3>
+<p>⭐⭐⭐⭐⭐</p>
+<p>El arroz con coco es espectacular.</p>
+
+</div>
+
+<div class="review">
+
+<img src="https://randomuser.me/api/portraits/men/52.jpg">
+<h3>Jorge Pérez</h3>
+<p>⭐⭐⭐⭐⭐</p>
+<p>Muy buena atención.</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACTO -->
+
+<section id="contacto">
+
+<h2>Contáctanos</h2>
+
+<form>
+
+<input placeholder="Nombre">
+<input placeholder="Correo electrónico">
+<textarea placeholder="Mensaje"></textarea>
+
+<button>Enviar</button>
+
+</form>
+
+</section>
+
+<!-- LOGIN -->
+
+<section id="login">
+
+<div class="box">
+
+<h2>Iniciar sesión</h2>
+
+<input placeholder="Correo">
+<input type="password" placeholder="Contraseña">
+
+<button>Ingresar</button>
+
+<p>¿Olvidaste tu contraseña?</p>
+
+</div>
+
+</section>
+
+<!-- REGISTRO -->
+
+<section id="registro">
+
+<div class="box">
+
+<h2>Crear cuenta</h2>
+
+<input placeholder="Nombre completo">
+<input placeholder="Correo">
+<input type="password" placeholder="Contraseña">
+<input type="password" placeholder="Confirmar contraseña">
+
+<button>Registrarse</button>
+
+</div>
+
+</section>
+
+<section id="admin">
+
+<h2>Panel del Administrador</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="card-content">
+
+<h3>Gestión de productos</h3>
+
+<p>
+El administrador puede registrar nuevos productos, editar información
+o eliminar productos del catálogo.
+</p>
+
+<button>Agregar producto</button>
+
+</div>
+</div>
+
+<div class="card">
+<div class="card-content">
+
+<h3>Control de inventario</h3>
+
+<p>
+Permite verificar la disponibilidad de productos y controlar
+los niveles de inventario del sistema.
+</p>
+
+<button>Ver inventario</button>
+
+</div>
+</div>
+
+<div class="card">
+<div class="card-content">
+
+<h3>Reportes del sistema</h3>
+
+<p>
+El administrador puede visualizar reportes de ventas,
+pedidos realizados y desempeño del sistema.
+</p>
+
+<button>Ver reportes</button>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="cocinero">
+
+<h2>Panel del Cocinero</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="card-content">
+
+<h3>Pedidos pendientes</h3>
+
+<p>
+Aquí se muestran los pedidos que deben prepararse
+en la cocina según las órdenes registradas en el sistema.
+</p>
+
+<button>Ver pedidos</button>
+
+</div>
+</div>
+
+<div class="card">
+<div class="card-content">
+
+<h3>Actualizar estado del pedido</h3>
+
+<p>
+El cocinero puede marcar los pedidos como
+"En preparación" o "Listos para entregar".
+</p>
+
+<button>Actualizar estado</button>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="ventas">
+
+<h2>Panel del Auxiliar de Ventas</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="card-content">
+
+<h3>Registrar pedido</h3>
+
+<p>
+Permite registrar pedidos realizados por los clientes
+y agregarlos al sistema para su procesamiento.
+</p>
+
+<button>Registrar pedido</button>
+
+</div>
+</div>
+
+<div class="card">
+<div class="card-content">
+
+<h3>Consultar pedidos</h3>
+
+<p>
+El auxiliar de ventas puede verificar el estado
+de los pedidos realizados por los clientes.
+</p>
+
+<button>Consultar pedidos</button>
+
+</div>
+</div>
+
+<div class="card">
+<div class="card-content">
+
+<h3>Confirmar pagos</h3>
+
+<p>
+Permite verificar los pagos realizados por los clientes
+y registrar la confirmación dentro del sistema.
+</p>
+
+<button>Confirmar pago</button>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- CARRITO -->
+
+<section id="carrito">
+
+<div class="carrito-box">
+
+<h2>Carrito de compras</h2>
+
+<div id="listaCarrito"></div>
+
+<h3 id="total"></h3>
+
+<button onclick="verPedido()">Visualizar pedido</button>
+
+<button onclick="carrito=[];verCarrito()">Vaciar carrito</button>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+
+<p>© 2025 Aromas.Duo - Todos los derechos reservados</p>
+
+</footer>
+
+</body>
+</html>
