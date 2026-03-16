@@ -1,89 +1,132 @@
-# Aromas.Duo – Prototipo Frontend
+## Aromas a Dúo – Prototipo Frontend
+# Descripción del proyecto
 
-## Descripción del proyecto
+Aromas a Dúo es un prototipo de interfaz web desarrollado como parte del proyecto formativo del programa Análisis y Desarrollo de Software del SENA.
 
-Aromas.Duo es un prototipo de interfaz web desarrollado como parte del proyecto formativo del programa **Análisis y Desarrollo de Software del SENA**.
+El objetivo del proyecto es representar la estructura visual y la navegación de un sistema web para una cocina oculta (dark kitchen) llamada Aromas a Dúo. Este sistema está pensado para permitir a los clientes conocer la marca, explorar el menú, registrarse en la plataforma e iniciar sesión para interactuar con los servicios ofrecidos por el negocio.
 
-El objetivo del prototipo es representar la estructura visual y la navegación de una tienda en línea dedicada a la venta de perfumes y fragancias, permitiendo visualizar las diferentes secciones del sistema antes de su desarrollo completo.
+El prototipo permite visualizar cómo se organizarán las interfaces del sistema antes de su implementación completa con funcionalidades backend y bases de datos.
 
-Este prototipo fue construido utilizando **HTML y CSS**, permitiendo mostrar la organización de las interfaces del sistema y la interacción básica entre las secciones del sitio.
+El desarrollo del prototipo se realizó utilizando HTML y CSS, lo que permite representar la estructura del sitio web y el diseño visual de sus diferentes secciones.
 
----
+* Objetivo del prototipo
 
-## Estructura del proyecto
+El propósito del prototipo es:
 
-El proyecto se encuentra organizado dentro de una carpeta llamada:
+Representar visualmente la estructura del sistema web.
 
-```
+Diseñar la navegación entre las diferentes secciones del sitio.
+
+Mostrar la organización de las interfaces antes del desarrollo completo del sistema.
+
+Servir como base para la futura implementación de funcionalidades dinámicas.
+
+* Estructura del proyecto
+
+El proyecto se encuentra organizado dentro de la siguiente carpeta:
+
 modulos_aromas_duo
-```
 
-Dentro de esta carpeta se encuentran los siguientes archivos:
+Estructura del proyecto:
 
-```
 modulos_aromas_duo
 │
 ├── prototipo.html
 └── prototipo.style.css
-```
+* prototipo.html
 
-### prototipo.html
+Archivo que contiene la estructura principal del sistema, donde se definen las diferentes secciones del prototipo.
 
-Archivo que contiene la estructura principal del sistema.
-Define las diferentes secciones del prototipo como:
+Entre las secciones representadas se encuentran:
 
-* Página de inicio
-* Catálogo de productos
-* Reseñas de clientes
-* Blog
-* Contacto
-* Login
-* Registro
-* Carrito de compras
+Página de inicio
 
-### prototipo.style.css
+Menú o catálogo de productos
+
+Reseñas de clientes
+
+Blog o sección informativa
+
+Contacto
+
+Inicio de sesión (Login)
+
+Registro de usuarios
+
+Carrito de pedidos
+
+Este archivo organiza el contenido utilizando HTML5, permitiendo estructurar las diferentes partes de la interfaz.
+
+* prototipo.style.css
 
 Archivo encargado de definir los estilos visuales del sistema, incluyendo:
 
-* Colores
-* Tipografía
-* Distribución de elementos
-* Diseño general de las interfaces
+Colores del sitio
 
-La separación entre **estructura (HTML)** y **estilos (CSS)** permite mantener el código organizado y facilita futuras modificaciones.
+Tipografía
 
----
+Distribución de los elementos
 
-## Tecnologías utilizadas
+Diseño general de las interfaces
 
-Las tecnologías empleadas para el desarrollo del prototipo son:
+La separación entre estructura (HTML) y estilos (CSS) permite mantener el código organizado, mejorar la mantenibilidad del proyecto y facilitar futuras modificaciones.
 
-* HTML5
-* CSS3
-* Git (control de versiones)
-* GitHub (repositorio remoto)
+* Tecnologías utilizadas
 
----
+Las tecnologías empleadas en el desarrollo del prototipo son:
 
-## Control de versiones
+HTML5 – estructura del sitio web
 
-El proyecto utiliza **Git** como herramienta de control de versiones para registrar los cambios realizados durante el desarrollo.
+CSS3 – diseño y estilos visuales
 
-El repositorio remoto se encuentra alojado en **GitHub**, lo que permite mantener un historial de modificaciones del proyecto y facilitar el acceso al código fuente.
+Git – control de versiones del proyecto
 
----
+GitHub – repositorio remoto del código
 
-## Autor
+Estas herramientas permiten desarrollar proyectos web de manera organizada y mantener un registro de los cambios realizados durante el proceso de desarrollo.
 
-**Alejandro Giraldo Florez**
-Aprendiz – Análisis y Desarrollo de Software , Ficha 3070325
+* Control de versiones
+
+El proyecto utiliza Git como herramienta de control de versiones para gestionar los cambios realizados durante el desarrollo del prototipo.
+
+El repositorio remoto se encuentra alojado en GitHub, lo que permite:
+
+Mantener un historial de cambios del proyecto.
+
+Facilitar el acceso al código fuente.
+
+Permitir futuras mejoras o actualizaciones del sistema.
+
+* Cómo ejecutar el proyecto
+
+Para visualizar el prototipo del sistema solo es necesario seguir los siguientes pasos:
+
+Descargar o clonar el repositorio del proyecto.
+
+Abrir la carpeta del proyecto.
+
+Ejecutar el archivo:
+
+prototipo.html
+
+El archivo se abrirá en el navegador web mostrando el prototipo de la interfaz del sistema Aromas a Dúo.
+
+* Autor
+
+Alejandro Giraldo Flórez
+Aprendiz – Análisis y Desarrollo de Software
+Ficha: 3070325
 Servicio Nacional de Aprendizaje (SENA)
 
----
+* Evidencia académica
 
-## Evidencia académica
+Este proyecto fue desarrollado como parte de una evidencia académica del programa Análisis y Desarrollo de Software del SENA, con el objetivo de aplicar conocimientos relacionados con:
 
-Este proyecto fue desarrollado como parte de la evidencia:
+Diseño de interfaces web
 
-**GA7-220501096-AA4-EV03**
-Componente frontend del proyecto formativo y proyectos de clase.
+Organización de código frontend
+
+Documentación de proyectos
+
+Uso de herramientas de control de versiones
+
